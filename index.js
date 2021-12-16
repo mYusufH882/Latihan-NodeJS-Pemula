@@ -1,11 +1,16 @@
 const http = require("http")
 const fs = require("fs")
+const url = require("url")
 
 let PORT = 3000;
 const server = http.createServer(function (req, res) {
-    fs.readFile("index1.html", function(err, data) {
+    var string = url.parse(req.url, true);
+    var filename = "." + string.pathname;
+
+    fs.readFile(filename, function(err, data) {
         if(err) {
-            return console.error("File not found");
+            res.writeHeader(404, {"Content-type": "text/html"});
+            return res.end("File not found");
         }
         
         res.writeHeader(200, {"Content-type": "text/html"});
