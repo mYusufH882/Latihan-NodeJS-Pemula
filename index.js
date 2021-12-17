@@ -10,7 +10,7 @@ const server = http.createServer(function (req, res) {
     fs.readFile(filename, function(err, data) {
         if(err) {
             res.writeHeader(404, {"Content-type": "text/html"});
-            return res.end("File not found");
+            return res.end("File Tidak Ada");
         }
         
         res.writeHeader(200, {"Content-type": "text/html"});
